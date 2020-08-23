@@ -8,7 +8,7 @@ import {
 
 import {
   browse,
-} from "./mod.ts";
+} from "./browser.ts";
 
 Deno.test("browse", async function () {
   const server = await serve({ port: 8080 });
