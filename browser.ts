@@ -1,26 +1,47 @@
 export interface BrowseOptions {
   url?: string;
-  browser: "chrome";
+  browser: "chrome" | "firefox";
   browserPath?: string;
   browserArgs?: string[];
   headless: boolean;
 }
 
 export function browse(options: BrowseOptions): Deno.Process {
-  const browserPath = options.browserPath ?? chromePath();
-  const browserArgs = options.browserArgs ?? chromeArgs(options);
-
   return Deno.run({
     cmd: [
-      browserPath,
-      ...browserArgs,
+      browserPath(options),
+      ...browserArgs(options),
     ],
     stdout: "null",
     stderr: "null",
   });
 }
 
-function chromePath(): string {
+function browserPath(options: BrowseOptions): string {
+  switch (options.browser) {
+    case "chrome":
+      return chromePath(options);
+
+    case "firefox":
+      return firefoxPath(options);
+  }
+}
+
+function browserArgs(options: BrowseOptions): string[] {
+  switch (options.browser) {
+    case "chrome":
+      return chromeArgs(options);
+
+    case "firefox":
+      return firefoxArgs(options);
+  }
+}
+
+function chromePath(options: BrowseOptions): string {
+  if (options.browserPath) {
+    return options.browserPath;
+  }
+
   switch (Deno.build.os) {
     case "darwin":
       return "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome";
@@ -57,6 +78,39 @@ function chromeArgs(options: BrowseOptions): string[] {
     args.push(
       "--headless",
       "--remote-debugging-port=9292",
+    );
+  }
+
+  if (options.url) {
+    args.push(options.url);
+  }
+
+  return args;
+}
+
+function firefoxPath(options: BrowseOptions): string {
+  if (options.browserPath) {
+    return options.browserPath;
+  }
+
+  switch (Deno.build.os) {
+    case "darwin":
+      return "/Applications/Firefox.app/Contents/MacOS/firefox";
+
+    case "linux":
+      return "/usr/bin/firefox";
+
+    case "windows":
+      return "C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+  }
+}
+
+function firefoxArgs(options: BrowseOptions): string[] {
+  const args = [];
+
+  if (options.headless) {
+    args.push(
+      "--headless",
     );
   }
 
