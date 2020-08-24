@@ -12,7 +12,11 @@ import {
 
 Deno.test("browseChrome", async function () {
   const server = await serve({ port: 8080 });
-  const browser = await browse({ url: "http://localhost:8080", browser: "chrome", headless: true });
+  const browser = await browse({
+    url: "http://localhost:8080",
+    browser: "chrome",
+    headless: true,
+  });
 
   for await (const request of server) {
     await request.respond({ body: "" });
@@ -26,7 +30,11 @@ Deno.test("browseChrome", async function () {
 
 Deno.test("browseFirefox", async function () {
   const server = await serve({ port: 8080 });
-  const browser = await browse({ url: "http://localhost:8080", browser: "firefox", headless: true });
+  const browser = await browse({
+    url: "http://localhost:8080",
+    browser: "firefox",
+    headless: true,
+  });
 
   for await (const request of server) {
     await request.respond({ body: "" });
