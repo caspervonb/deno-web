@@ -1,13 +1,16 @@
 export interface BrowseOptions {
   url: string;
   browser: "chrome";
+  browserPath?: string;
   headless: boolean;
 }
 
 export function browse(options: BrowseOptions): Deno.Process {
+  const browserPath = options.browserPath ?? chromePath();
+
   return Deno.run({
     cmd: [
-      chromePath(),
+      browserPath,
       ...chromeArgs(options),
     ],
     stdout: "null",
