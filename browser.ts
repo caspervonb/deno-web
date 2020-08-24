@@ -1,5 +1,5 @@
 export interface BrowseOptions {
-  url: string;
+  url?: string;
   browser: "chrome";
   browserPath?: string;
   browserArgs?: string[];
@@ -60,7 +60,9 @@ function chromeArgs(options: BrowseOptions): string[] {
     );
   }
 
-  args.push(options.url);
+  if (options.url) {
+    args.push(options.url);
+  }
 
   return args;
 }
