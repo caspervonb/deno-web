@@ -1,14 +1,8 @@
-import {
-  assertEquals,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-import {
-  serve,
-} from "https://deno.land/std/http/server.ts";
+import { serve } from "https://deno.land/std/http/server.ts";
 
-import {
-  browse,
-} from "./browser.ts";
+import { browse } from "./browser.ts";
 
 Deno.test("browseChrome", async function () {
   const server = await serve({ port: 8080 });
