@@ -3,7 +3,7 @@ export interface BrowseOptions {
   browser: "chrome" | "firefox";
   browserPath?: string;
   browserArgs?: string[];
-  headless: boolean;
+  headless?: boolean;
 }
 
 export function browse(options: BrowseOptions): Deno.Process {
