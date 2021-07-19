@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
+        deno: [1.x, canary]
 
     steps:
     - name: Check out repository
@@ -20,7 +21,7 @@ jobs:
     - name: Set up Deno
       uses: denoland/setup-deno@v1
       with:
-        deno-version: 1.x
+        deno-version: ${{ matrix.deno }}
 
     - name: Test
       run: |
