@@ -52,7 +52,7 @@ function chromePath(options: BrowseOptions): string {
       return "/usr/bin/google-chrome";
 
     case "windows":
-      return "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+      return "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
   }
 }
 
@@ -103,7 +103,7 @@ function firefoxPath(options: BrowseOptions): string {
       return "/usr/bin/firefox";
 
     case "windows":
-      return "C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+      return "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
   }
 }
 
