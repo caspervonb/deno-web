@@ -8,7 +8,11 @@ export interface BrowseOptions {
   headless?: boolean;
 }
 
-export function browse(options: BrowseOptions): Deno.Process {
+export interface BrowserProcess {
+  close(): void;
+}
+
+export function browse(options: BrowseOptions): BrowserProcess {
   return Deno.run({
     cmd: [
       browserPath(options),
