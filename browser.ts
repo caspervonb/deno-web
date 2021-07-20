@@ -1,6 +1,8 @@
+export type BrowserIdentifier = "chrome" | "firefox";
+
 export interface BrowseOptions {
   url?: string;
-  browser: "chrome" | "firefox";
+  browser: BrowserIdentifier;
   browserPath?: string;
   browserArgs?: string[];
   headless?: boolean;
