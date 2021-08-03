@@ -1,6 +1,6 @@
 export type BrowserIdentifier = "chrome" | "firefox";
 
-export interface BrowseOptions {
+export interface LaunchOptions {
   url?: string;
   browser: BrowserIdentifier;
   browserPath?: string;
@@ -12,7 +12,7 @@ export interface BrowserProcess {
   close(): void;
 }
 
-export function browse(options: BrowseOptions): BrowserProcess {
+export function launch(options: LaunchOptions): BrowserProcess {
   return Deno.run({
     cmd: [
       browserPath(options),
@@ -23,7 +23,7 @@ export function browse(options: BrowseOptions): BrowserProcess {
   });
 }
 
-function browserPath(options: BrowseOptions): string {
+function browserPath(options: LaunchOptions): string {
   switch (options.browser) {
     case "chrome":
       return chromePath(options);
@@ -33,7 +33,7 @@ function browserPath(options: BrowseOptions): string {
   }
 }
 
-function browserArgs(options: BrowseOptions): string[] {
+function browserArgs(options: LaunchOptions): string[] {
   switch (options.browser) {
     case "chrome":
       return chromeArgs(options);
@@ -43,7 +43,7 @@ function browserArgs(options: BrowseOptions): string[] {
   }
 }
 
-function chromePath(options: BrowseOptions): string {
+function chromePath(options: LaunchOptions): string {
   if (options.browserPath) {
     return options.browserPath;
   }
@@ -60,7 +60,7 @@ function chromePath(options: BrowseOptions): string {
   }
 }
 
-function chromeArgs(options: BrowseOptions): string[] {
+function chromeArgs(options: LaunchOptions): string[] {
   const args = [];
 
   args.push(
@@ -94,7 +94,7 @@ function chromeArgs(options: BrowseOptions): string[] {
   return args;
 }
 
-function firefoxPath(options: BrowseOptions): string {
+function firefoxPath(options: LaunchOptions): string {
   if (options.browserPath) {
     return options.browserPath;
   }
@@ -111,7 +111,7 @@ function firefoxPath(options: BrowseOptions): string {
   }
 }
 
-function firefoxArgs(options: BrowseOptions): string[] {
+function firefoxArgs(options: LaunchOptions): string[] {
   const args = [];
 
   if (options.headless) {
