@@ -4,7 +4,6 @@ export interface LaunchOptions {
   url?: string;
   browser: BrowserIdentifier;
   browserPath?: string;
-  browserArgs?: string[];
   headless?: boolean;
 }
 
