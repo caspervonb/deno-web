@@ -3,7 +3,6 @@ export type BrowserIdentifier = "chrome" | "firefox";
 export interface LaunchOptions {
   url?: string;
   browser: BrowserIdentifier;
-  browserPath?: string;
   headless?: boolean;
 }
 
@@ -43,10 +42,6 @@ function browserArgs(options: LaunchOptions): string[] {
 }
 
 function chromePath(options: LaunchOptions): string {
-  if (options.browserPath) {
-    return options.browserPath;
-  }
-
   switch (Deno.build.os) {
     case "darwin":
       return "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome";
@@ -94,10 +89,6 @@ function chromeArgs(options: LaunchOptions): string[] {
 }
 
 function firefoxPath(options: LaunchOptions): string {
-  if (options.browserPath) {
-    return options.browserPath;
-  }
-
   switch (Deno.build.os) {
     case "darwin":
       return "/Applications/Firefox.app/Contents/MacOS/firefox";
