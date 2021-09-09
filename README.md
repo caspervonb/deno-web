@@ -1,3 +1,14 @@
-# web
+# web - launch web browsers
 
-Cobwebs everywhere.
+The web module lets you spawn web browsers from the deno runtime.
+
+## Example
+
+```ts
+import { launch } from "./browser/mod.ts";
+
+const process = await launch({
+  url: "https://google.com",
+  browser: "chrome",
+});
+```
