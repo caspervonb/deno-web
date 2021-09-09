@@ -1,6 +1,6 @@
-# web - launch web browsers
+# Web - Launch web browsers
 
-The web module lets you spawn web browsers from the deno runtime.
+The `web` module lets you spawn web browsers from the deno runtime with ease.
 
 ## Example
 
