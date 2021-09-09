@@ -13,7 +13,7 @@ export interface BrowserProcess {
 export function launch(options: LaunchOptions): BrowserProcess {
   return Deno.run({
     cmd: [
-      browserPath(options),
+      browserPath(options.browser),
       ...browserArgs(options),
     ],
     stdout: "null",
@@ -21,13 +21,13 @@ export function launch(options: LaunchOptions): BrowserProcess {
   });
 }
 
-function browserPath(options: LaunchOptions): string {
-  switch (options.browser) {
+function browserPath(browser: BrowserIdentifier): string {
+  switch (browser) {
     case "chrome":
-      return chromePath(options);
+      return chromePath();
 
     case "firefox":
-      return firefoxPath(options);
+      return firefoxPath();
   }
 }
 
@@ -41,7 +41,7 @@ function browserArgs(options: LaunchOptions): string[] {
   }
 }
 
-function chromePath(options: LaunchOptions): string {
+function chromePath(): string {
   switch (Deno.build.os) {
     case "darwin":
       return "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome";
@@ -88,7 +88,7 @@ function chromeArgs(options: LaunchOptions): string[] {
   return args;
 }
 
-function firefoxPath(options: LaunchOptions): string {
+function firefoxPath(): string {
   switch (Deno.build.os) {
     case "darwin":
       return "/Applications/Firefox.app/Contents/MacOS/firefox";
