@@ -2,7 +2,7 @@ import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
 import { serve } from "https://deno.land/std/http/server.ts";
 
-import { launch } from "./browser.ts";
+import { launch } from "./launch.ts";
 
 Deno.test("launchChrome", async function () {
   const server = await serve({ port: 8080 });
